@@ -1,5 +1,2 @@
 model,train_accuracy,train_recall,tn,fp,fn,tp
-LogisticRegression,0.8444266238973537,0.06,1041,6,188,12
-RandomForestClassifier,1.0,1.0,1047,0,0,200
-AdaBoostClassifier,0.9013632718524459,0.47,1030,17,106,94
-KNeighborsClassifier,0.8748997594226142,0.305,1030,17,139,61
+XGBClassifier,1.0,1.0,1047,0,0,200

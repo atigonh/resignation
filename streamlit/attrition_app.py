@@ -160,6 +160,10 @@ selected_features = [
     'YearsWithCurrManager'
 ]
 
+import os
+st.write(os.path.dirname(os.path.abspath('employee_data_clean_eda.csv')))
+
+
 df = pd.read_csv('employee_data_clean_eda.csv')
 
 X = df[selected_features]

@@ -167,8 +167,10 @@ path_local = 'employee_data_clean_eda.csv'
 
 if os.path.isfile(path_online):
     df = pd.read_csv(path_online)
+    st.write('using online path')
 else:
     df = pd.read_csv(path_local)
+    st.write('using local path')
 
 X = df[selected_features]
 y = df['Attrition']

@@ -160,7 +160,7 @@ selected_features = [
     'YearsWithCurrManager'
 ]
 
-df = pd.read_csv(r'employee_data_clean_eda.csv')
+df = pd.read_csv('employee_data_clean_eda.csv')
 
 X = df[selected_features]
 y = df['Attrition']

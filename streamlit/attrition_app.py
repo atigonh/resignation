@@ -104,10 +104,9 @@ else:
         return features
     input_df = user_input_features()
 
-st.write(input_df.iloc[:,:6])
-st.write(input_df.iloc[:,6:13])
-st.write(input_df.iloc[:,13:19])
-st.write(input_df.iloc[:,19:25])
+st.write(input_df.iloc[:,:8])
+st.write(input_df.iloc[:,8:16])
+st.write(input_df.iloc[:,16:25])
     
 # Combines user input features with entire penguins dataset
 # This will be useful for the encoding phase
@@ -161,10 +160,15 @@ selected_features = [
 ]
 
 import os
-st.write(os.path.dirname(os.path.abspath('employee_data_clean_eda.csv')))
+#st.write(os.path.dirname(os.path.abspath('employee_data_clean_eda.csv')))
 
+path_online = '/app/resignation/streamlit/employee_data_clean_eda.csv'
+path_local = 'employee_data_clean_eda.csv'
 
-df = pd.read_csv('/app/resignation/streamlit/employee_data_clean_eda.csv')
+if os.path.isfile(path_online):
+    df = pd.read_csv(path_online)
+else:
+    df = pd.read_csv(path_local)
 
 X = df[selected_features]
 y = df['Attrition']

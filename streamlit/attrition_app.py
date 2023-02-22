@@ -1,11 +1,25 @@
-# This code mimic from: https://www.youtube.com/watch?v=Eai1jaZrRDs&list=PLtqF5YXg7GLmCvTswG32NqQypOuYkPRUE&index=3
-
+########## import start ########## line 1 ##########
+import os
 import streamlit as st
 import pandas as pd
 import numpy as np
-import pickle
+from sklearn.ensemble import AdaBoostClassifier
+from sklearn.model_selection import train_test_split
+from sklearn.preprocessing import OneHotEncoder
+from sklearn.compose import ColumnTransformer
+from sklearn.preprocessing import StandardScaler
+pd.options.display.max_columns = None
+#import pickle
+#from sklearn.metrics import confusion_matrix
+#from sklearn.linear_model import LogisticRegression
 #from sklearn.ensemble import RandomForestClassifier
+#from sklearn.neighbors import KNeighborsClassifier
+########## import end ##########
 
+
+
+########## sidebar start ########## line 21 ##########
+# This code mimic from: https://www.youtube.com/watch?v=Eai1jaZrRDs&list=PLtqF5YXg7GLmCvTswG32NqQypOuYkPRUE&index=3
 hide_table_row_index = """
             <style>
             thead tr th:first-child {display:none}
@@ -16,6 +30,7 @@ hide_table_row_index = """
 # Inject CSS with Markdown
 st.markdown(hide_table_row_index, unsafe_allow_html=True)
 
+# feature engineering for salary
 def salary_range(salary):
     if salary<2500:
         return 1250
@@ -38,17 +53,11 @@ def salary_range(salary):
     else:
         return 23750
 
-st.write("""
-#### Resignation Prediction (Use left panel for Input Features)
-""")
-
+# top of the sidebar
 st.sidebar.header('Input Features')
 
 # Collects user input features into dataframe
-uploaded_file = None
-if uploaded_file is not None:
-    input_df = pd.read_csv(uploaded_file)
-else:
+if True:
     def user_input_features():
         age = st.sidebar.slider('Age', 18,59,37)
         business_travel = st.sidebar.radio('Business Travel', ('Yes', 'No'))
@@ -66,7 +75,7 @@ else:
         salary = st.sidebar.slider('Salary', 1000,20000,5000)
         num_comp_work_1 = st.sidebar.slider('Number of Company Worked', 1, 10, 2)#'NumCompaniesWorked',
         #'num_comp_work',
-        ot = st.sidebar.radio('Overtime', ('Yes', 'No'))#'OverTime', # (*****+25%)
+        ot = st.sidebar.radio('Overtime', ('No', 'Yes'))#'OverTime', # (*****+25%)
         relationship = st.sidebar.slider('RelationshipSatisfaction', 1,4,3)     
         stock = st.sidebar.slider('StockOptionLevel', 0, 3, 0) #'StockOptionLevel',
         ttl_wk_yr = st.sidebar.slider('TotalWorkingYears', 0,38,10) # (****-18%)
@@ -103,36 +112,14 @@ else:
         features = pd.DataFrame(data, index=[0])
         return features
     input_df = user_input_features()
-
-st.write(input_df.iloc[:,:8])
-st.write(input_df.iloc[:,8:16])
-st.write(input_df.iloc[:,16:25])
+########## sidebar end ##########
     
-# Combines user input features with entire penguins dataset
-# This will be useful for the encoding phase
-#penguins_raw = pd.read_csv('penguins_cleaned.csv')
-#penguins = penguins_raw.drop(columns=['species'])
-#df = pd.concat([input_df,penguins],axis=0)
 
 
-###############################################################
-import pandas as pd
-import numpy as np
-#import matplotlib.pyplot as plt
-#import seaborn as sns
-
-from sklearn.metrics import confusion_matrix
-from sklearn.model_selection import train_test_split
-from sklearn.linear_model import LogisticRegression
-from sklearn.ensemble import RandomForestClassifier, AdaBoostClassifier
-from sklearn.neighbors import KNeighborsClassifier
-from sklearn.preprocessing import OneHotEncoder
-from sklearn.compose import ColumnTransformer
-from sklearn.preprocessing import StandardScaler
-pd.options.display.max_columns = None
-
-
-# select one that correlation over +/- 10%
+    
+    
+########## modeling start ########## line 121 ##########
+# select suspected useful features
 selected_features = [
     'Age',
     'BusinessTravel',
@@ -158,10 +145,10 @@ selected_features = [
     'YearsInCurrentRole',
     'YearsWithCurrManager'
 ]
+# code to check absolute path online - need to use when deploy
+# st.write(os.path.dirname(os.path.abspath('employee_data_clean_eda.csv')))
 
-import os
-#st.write(os.path.dirname(os.path.abspath('employee_data_clean_eda.csv')))
-
+# read in data
 path_online = '/app/resignation/streamlit/employee_data_clean_eda.csv'
 path_local = 'employee_data_clean_eda.csv'
 
@@ -172,16 +159,17 @@ else:
     df = pd.read_csv(path_local)
     status = 'local machine'
 
+# train test split
 X = df[selected_features]
 y = df['Attrition']
 X_train, X_test, y_train, y_test = train_test_split(X, y, random_state=42, stratify=y, test_size=0.15)
 X_test = pd.concat([input_df,X_test],axis=0)
 
+# distinct categorical columns & numerical columns
 glimpse = []
 for c in df.columns:
     make_set = list(set(df[c]))
     data = {'column_name':c, 'set_10':make_set[:10], 'set_count':len(make_set), 'type':str(df[c].dtypes)}
-    #glimpse.append(data)
     if data['type'] == 'object':
         glimpse.append(data)
 df_glimpse = pd.DataFrame(glimpse)
@@ -189,6 +177,7 @@ dummy_col = [c for c in df_glimpse['column_name'] if c in selected_features]
 
 numerical_features = [c for c in selected_features if c not in dummy_col]
 
+# ColumnTransformer
 ct = ColumnTransformer([
         ('sc', StandardScaler(), numerical_features),
         ('ohe', OneHotEncoder(), dummy_col)
@@ -197,11 +186,24 @@ ct = ColumnTransformer([
 X_train_ct = ct.fit_transform(X_train[selected_features])
 X_test_ct = ct.transform(X_test[selected_features])
 
+# Fitting model
 m = AdaBoostClassifier(random_state=42)
 m.fit(X_train_ct, y_train)
 score = m.predict_proba(X_test_ct)[0][1]
 
-############## Result ##########################################
+########## modeling end ##########
+
+
+
+
+
+
+########## main window start ########## line 201 ##########
+st.write("""#### Resignation Prediction (Use left panel for Input Features)""")
+st.write(input_df.iloc[:,:8])
+st.write(input_df.iloc[:,8:16])
+st.write(input_df.iloc[:,16:25])
+
 if score >= 0.5:
     new_title = f'<p style="font-family:sans-serif; color:Red; font-size: 24px;">Prediction: Tend to Leave</p>'
 else:
@@ -210,9 +212,5 @@ else:
 st.markdown(new_title, unsafe_allow_html=True)
 st.write(f'(score={round(score,3)})')
 st.write(status)
-#st.write('#### Prediction', '===>', '**Tend to "Leave"**' if score >= 0.5 else '**Tend to "Stay"**', f'(score={round(score,3)})')
 
-###############################################################
-
-#st.write(X_test[selected_features].iloc[:1,:])
-
+########## main window end ##########

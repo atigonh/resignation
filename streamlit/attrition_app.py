@@ -167,10 +167,10 @@ path_local = 'employee_data_clean_eda.csv'
 
 if os.path.isfile(path_online):
     df = pd.read_csv(path_online)
-    st.write('using online path')
+    status = 'online'
 else:
     df = pd.read_csv(path_local)
-    st.write('using local path')
+    status = 'local machine'
 
 X = df[selected_features]
 y = df['Attrition']
@@ -209,6 +209,7 @@ else:
 
 st.markdown(new_title, unsafe_allow_html=True)
 st.write(f'(score={round(score,3)})')
+st.write(status)
 #st.write('#### Prediction', '===>', '**Tend to "Leave"**' if score >= 0.5 else '**Tend to "Stay"**', f'(score={round(score,3)})')
 
 ###############################################################

@@ -199,18 +199,21 @@ score = m.predict_proba(X_test_ct)[0][1]
 
 
 ########## main window start ########## line 201 ##########
-st.write("""#### Resignation Prediction (Use left panel for Input Features)""")
-st.write(input_df.iloc[:,:8])
-st.write(input_df.iloc[:,8:16])
-st.write(input_df.iloc[:,16:25])
-
-if score >= 0.5:
-    new_title = f'<p style="font-family:sans-serif; color:Red; font-size: 24px;">Prediction: Tend to Leave</p>'
-else:
-    new_title = f'<p style="font-family:sans-serif; color:Green; font-size: 24px;">Prediction: Tend to Stay</p>'
-
-st.markdown(new_title, unsafe_allow_html=True)
-st.write(f'(score={round(score,3)})')
-st.write(status)
+#st.write("""### Resignation Prediction (Use left panel to edit values)""")
+col1, col2 = st.columns(2, gap='large')
+with col2:
+    st.dataframe(data=input_df.iloc[0,:], height=845, use_container_width=True)
+with col1:
+    if score >= 0.5:
+        new_title = '<p style="font-family:sans-serif; color:Red; font-size: 36px;">Prediction: Leave</p>'
+    else:
+        new_title = '<p style="font-family:sans-serif; color:Green; font-size: 36px;">Prediction: Stay</p>'
+    st.write("""### Resignation Prediction""")
+    st.write("""##### (Edit features on left panel)""")
+    st.write("""================================""")
+    st.markdown(new_title, unsafe_allow_html=True)
+    st.write("""================================""")
+    st.write(f'(score={round(score,3)})')
+    st.write(status)
 
 ########## main window end ##########

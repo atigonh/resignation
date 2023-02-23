@@ -199,7 +199,6 @@ score = m.predict_proba(X_test_ct)[0][1]
 
 
 ########## main window start ########## line 201 ##########
-#st.write("""### Resignation Prediction (Use left panel to edit values)""")
 col1, col2 = st.columns(2, gap='large')
 with col2:
     st.dataframe(data=input_df.iloc[0,:], height=845, use_container_width=True)
@@ -213,7 +212,7 @@ with col1:
     st.write("""================================""")
     st.markdown(new_title, unsafe_allow_html=True)
     st.write("""================================""")
-    st.write(f'(score={round(score,3)})')
-    st.write(status)
+    st.write(f'(Probability to Leave = {round(score,3)})')
+    st.write("""server: """, status)
 
 ########## main window end ##########

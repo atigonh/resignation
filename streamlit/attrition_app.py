@@ -187,7 +187,7 @@ X_train_ct = ct.fit_transform(X_train[selected_features])
 X_test_ct = ct.transform(X_test[selected_features])
 
 # Fitting model
-m = AdaBoostClassifier(random_state=42)
+m = AdaBoostClassifier(random_state=42, learning_rate=0.1, n_estimators=1000)
 m.fit(X_train_ct, y_train)
 score = m.predict_proba(X_test_ct)[0][1]
 

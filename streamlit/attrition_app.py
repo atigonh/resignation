@@ -84,6 +84,8 @@ if True:
         year_at_comp = st.sidebar.slider('YearsAtCompany', 0, 37, 5)#'YearsAtCompany',
         year_in_cur_role = st.sidebar.slider('YearsInCurrentRole', 0, 18, 2)
         year_w_cur_mgr = st.sidebar.slider('YearsWithCurrManager', 0, 17, 2)
+        mode = st.sidebar.radio('Model mode', ('Demo (Fast)', 'Production'))
+        mode = 1 if mode == 'Production' else 0 #convert
         
         data = {'Age': age,
                 'BusinessTravel': business_travel,
@@ -110,8 +112,8 @@ if True:
                 'YearsWithCurrManager': year_w_cur_mgr,
                }
         features = pd.DataFrame(data, index=[0])
-        return features
-    input_df = user_input_features()
+        return features, mode
+    input_df, mode = user_input_features()
 ########## sidebar end ##########
     
 
@@ -187,7 +189,10 @@ X_train_ct = ct.fit_transform(X_train[selected_features])
 X_test_ct = ct.transform(X_test[selected_features])
 
 # Fitting model
-m = AdaBoostClassifier(random_state=42, learning_rate=0.1, n_estimators=1000)
+if mode:
+    m = AdaBoostClassifier(random_state=42, learning_rate=0.1, n_estimators=1000)
+else:
+    m = AdaBoostClassifier(random_state=42)
 m.fit(X_train_ct, y_train)
 score = m.predict_proba(X_test_ct)[0][1]
 

@@ -60,20 +60,20 @@ This is the capstone project for a data science immersive student. (DSI-1128)
 |YearsWithCurrManager|int64|Years spent with the current manager (unit range 0-17)
 
 ## Brief summary of Analysis
-The improvements shown as the following table
+The improvements are shown in the following table
 
 |Score type|Baseline|Production|% of improvement|
 |:---|:---:|:---:|:---:|
 |Recall|0.36|0.40|11%|
-|Precision|0.40|0.59|15%|
+|Precision|0.59|0.88|49%|
 |F1-score|0.45|0.55|22%|
 
-### Confusion Matrix of production model
+### Confusion Matrix of the production model
 ![CM](./image/confusion_matrix_production.png)
 
 ## Conclusion
 1. The model met the expectations by improving the F1-Score by 22%. (Expected 20%)
-2. Precision is 88% (guess 9 leave, correct 8)
+2. Precision is 88% (if you guess 9 leave, 8 will be correct)
 
 ## Recommendations
 1. Any future improvements should prioritize high precision and acceptable recall.

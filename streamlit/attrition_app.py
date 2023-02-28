@@ -221,3 +221,13 @@ with col1:
     st.write("""server: """, status)
 
 ########## main window end ##########
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-WK0BKGGQJ2"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-WK0BKGGQJ2');
+</script>

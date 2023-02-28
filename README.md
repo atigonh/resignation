@@ -60,8 +60,10 @@ This is the capstone project for a data science immersive student. (DSI-1128)
 |YearsWithCurrManager|int64|Years spent with the current manager (unit range 0-17)
 
 ## Brief summary of Analysis
-|Score type|Baseline|Production|% improve|
-|---|---|---|---|
+The improvements shown as the following table
+
+|Score type|Baseline|Production|% of improvement|
+|:---|:---:|:---:|:---:|
 |Recall|0.36|0.40|11%|
 |Precision|0.40|0.59|15%|
 |F1-score|0.45|0.55|22%|

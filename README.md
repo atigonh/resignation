@@ -1,4 +1,4 @@
-![GA logo](https://upload.wikimedia.org/wikipedia/en/thumb/f/f4/General_Assembly_logo.svg/209px-General_Assembly_logo.svg.png)
+![GA](./image/ga.png)
 # Attrition Prediction
 (Resignation Prediction)
 

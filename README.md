@@ -29,16 +29,16 @@ This is the capstone project for a data science immersive student. (DSI-1128)
 |DailyRate|int64|Salary level (unit range 102-1499)
 |Department|object|Human Resources, Research & Development, Sales
 |DistanceFromHome|int64| Employee home distance from the office (unit range 1-29)
-|Education|int64| Level of education (unit range 1-5)
+|Education|int64| Level of education (1:Below College, 2:College, 3:Bachlor, 4:Master, 5:Doctor)(unit range 1-5)
 |EducationField|object| Human Resources, Technical Degree, Medical, Life Sciences, Marketing, Other
 |EmployeeCount|int64|Number of Employee for each observation(All are 1)
-|EmployeeNumber|int64|Employee Identification Number
-|EnvironmentSatisfaction|int64| Employee satisfaction with the company's environment (unit range 1-4)
+|EmployeeNumber|int64|An Employee Number is a unique number that has been assigned to each current and former State employee and elected official in the Position and Personnel DataBase (PPDB).
+|EnvironmentSatisfaction|int64| Employee satisfaction with the company's environment (1:Low, 2:Medium, 3:High, 4:Very High) (unit range 1-4)
 |Gender|object|Male, Female
-|HourlyRate|int64|Hourly salary (unit range 30-100)
+|HourlyRate|int64|An hourly employee is paid a wage for each hour worked, unlike a salaried employee. (unit range 30-100)
 |JobInvolvement|int64| Employee involved in job (unit range 1-4)
-|JobLevel|int64|Level of job (unit range 1-5)
-|JobRole|object| Employee role: Human Resources, Research Director, Manufacturing Director, Healthcare Representative, Sales Executive, Sales Representative, Manager, Research Scientist, Laboratory Technician
+|JobLevel|int64|Job grades and classifications. (unit range 1-5)
+|JobRole|object| Role of employee: Human Resources, Research Director, Manufacturing Director, Healthcare Representative, Sales Executive, Sales Representative, Manager, Research Scientist, Laboratory Technician
 |JobSatisfaction|int64|Satisfaction with the job (unit range 1-4)
 |MaritalStatus|object|1=Divorced, 2=Married, 3=Single
 |MonthlyIncome|int64|Monthly salary
@@ -47,13 +47,13 @@ This is the capstone project for a data science immersive student. (DSI-1128)
 |Over18|object|Y=yes, N=no (All are Y)
 |OverTime|object|1=yes, 0=no
 |PercentSalaryHike|int64|Percentage increase in salary
-|PerformanceRating|int64|Performance rating (unit range 3-4)
-|RelationshipSatisfaction|int64|Relations satisfaction (unit range 1-4)
+|PerformanceRating|int64|Performance rating (1:Low, 2:Good, 3:Excellent, 4:Outstanding) (unit range 1-4)
+|RelationshipSatisfaction|int64|Relations satisfaction (1:Low, 2:Medium, 3:High, 4:Very High)(unit range 1-4)
 |StandardHours|int64|Standard hours (all are 80)
-|StockOptionLevel|int64|Stock options (unit range 0-3)
+|StockOptionLevel|int64|Employee stock options, also known as ESOs, are stock options in the company’s stock granted by an employer to certain employees.(unit range 0-3)
 |TotalWorkingYears|int64|Total years worked (unit range 0-40)
 |TrainingTimesLastYear|int64|Hours spent training last year (unit range 0-6)
-|WorkLifeBalance|int64|Time spent between work and outside (unit range 1-4)
+|WorkLifeBalance|int64|Time spent between work and outside (1:Bad, 2:Good, 3:Better, 4:Best) (unit range 1-4)
 |YearsAtCompany|int64|Total number of years at the company (unit range 0-40)
 |YearsInCurrentRole|int64|Years in current role (unit range 0-18)
 |YearsSinceLastPromotion|int64|Last promotion (unit range 0-15)

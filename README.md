@@ -70,7 +70,10 @@ This is the capstone project for a data science immersive student. (DSI-1128)
 ![CM](./image/confusion_matrix_production.png)
 
 ## Conclusion
-
+1. The model met the expectations by improving the F1-Score by 22%. (Expected 20%)
+2. Precision is 88% (guess 9 leave, correct 8)
 
 ## Recommendations
+1. Any future improvements should prioritize high precision and acceptable recall.
+2. To approach the employee, using this model carefully and with caution is important.
 

@@ -229,5 +229,5 @@ with col1:
 
 
 ########## page view counter start ##########
-
+# No idea for putting page view counter
 ########## page view counter end ##########

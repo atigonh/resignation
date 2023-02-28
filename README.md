@@ -66,7 +66,7 @@ This is the capstone project for a data science immersive student. (DSI-1128)
 |Precision|0.40|0.59|15%|
 |F1-score|0.45|0.55|22%|
 
-### Confusion Matrix
+### Confusion Matrix of production model
 ![CM](./image/confusion_matrix_production.png)
 
 ## Conclusion

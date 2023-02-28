@@ -221,3 +221,19 @@ with col1:
     st.write("""server: """, status)
 
 ########## main window end ##########
+
+
+
+
+
+
+
+########## page view counter start ##########
+import st_state_patch
+s = st.GlobalState(key="user metadata")
+if not s:
+    # Initialize it here!
+    s.counter = 0
+s.counter += 1
+st.markdown(f'Page viewed = {s.counter}')
+########## page view counter end ##########
